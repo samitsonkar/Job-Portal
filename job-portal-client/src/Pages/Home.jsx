@@ -58,12 +58,16 @@ const Home = () => {
         filteredJobs = filteredItems;
       }
       if(selected){
-        filteredJobs = filteredJobs.filter(({jobLocation, maxPrice, experienceLevel, salaryType, employmentType, postingDate}) => (
-          jobLocation.toLowerCase()===selected.toLowerCase()||
-          parseInt(maxPrice)===parseInt(selected)||
-          salaryType.toLowerCase()===selected.toLowerCase||
-          employmentType.toLowerCase()===selected.toLowerCase()
-        ))
+        filteredJobs = filteredJobs.filter(({jobLocation, maxPrice, experienceLevel, salaryType, employmentType, postingDate}) => 
+          (
+            postingDate >= selected||
+            jobLocation.toLowerCase()===selected.toLowerCase()||
+            parseInt(maxPrice)<=selected||
+            salaryType===selected||
+            employmentType.toLowerCase()===selected.toLowerCase()||
+            experienceLevel===selected
+          )
+        )
       }
       const {startIndex,endIndex} = calculatePageRage();
       filteredJobs = filteredJobs.slice(startIndex,endIndex);
